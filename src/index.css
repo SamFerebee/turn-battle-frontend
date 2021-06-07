@@ -11,3 +11,68 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.abilityIcon {
+  height: 30px;
+  width: 30px;
+}
+
+.gearStoreIcon{
+  height: 80px;
+  width: 80px;
+}
+
+.gearStoreItem{
+  background-color: rgb(3, 252, 232);
+  width: 200px;
+  text-align: center;
+  border: 2px solid red;
+  margin-top: 10px;
+}
+
+.gearStoreItem:hover{
+  background-color: rgb(252, 3, 3);
+}
+
+#armorInnerSpan{
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.gearBuyButton:hover{
+  cursor: pointer;
+}
+
+#fullGearDiv{
+  border: 2px solid red;
+  height: 400px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gear-div{
+  border: 2px solid black;
+  height: 60px;
+  width: 60px;
+  position: relative;
+}
+
+#gear_head_div{
+  left: 80px;
+  top: 20px;
+}
+
+#gear_chest_div{
+  left: 245px;
+  top: -44px;
+}
+
+#gear_hands_div{
+  left: 305px;
+  top: 60px;
+}
+#gear_legs_div{
+  top: -4px;
+  left: 30px;
+}
