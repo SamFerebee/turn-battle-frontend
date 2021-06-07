@@ -58,10 +58,15 @@ code {
   position: relative;
 }
 
+.gear-div:hover{
+  border: 2px solid red;
+}
+
 #gear_head_div{
   left: 80px;
   top: 20px;
 }
+
 
 #gear_chest_div{
   left: 245px;

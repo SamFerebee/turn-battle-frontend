@@ -7,7 +7,6 @@ const PlayerView = ({user, sendToGearSelect, sendToGearStore, setCurrentPlayerGe
     const id = parseInt(params.id);
     const thePlayer = user.players.find((p) => p.id === id);
     setCurrentPlayerGearStore(thePlayer);
-    console.log(thePlayer)
 
     let gearBuffedStats = {
         health: 0,
