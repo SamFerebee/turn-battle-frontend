@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 
-const CreateAccount = () =>{
+const CreateAccount = ({setCurrentUser, sendToHome}) =>{
     const [formData, setFormData] = useState({
         name: "",
         password: "",
@@ -22,7 +22,21 @@ const CreateAccount = () =>{
             body: JSON.stringify(formData)
         })
             .then(r=>r.json())
-            .then(d=>console.log(d))
+            .then(d=>{
+                localStorage.setItem("token", d.token)
+                fetch("http://localhost:3000/me",{
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({user: d.user.username})
+                })
+                    .then(r=>r.json())
+                    .then(d=>{
+                        setCurrentUser(d);
+                        sendToHome();
+                    })
+            })
     }
 
     return (

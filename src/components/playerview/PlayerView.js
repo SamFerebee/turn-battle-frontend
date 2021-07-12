@@ -181,7 +181,10 @@ const PlayerView = ({user, sendToGearSelect, sendToGearStore, setCurrentPlayerGe
 
     return(
         <>
-            <h1>{thePlayer.name}</h1><img src={thePlayer.image} />
+            <h1>{thePlayer.name}</h1>
+            <h2>Level {thePlayer.level} {thePlayer.specialty.name}</h2>
+            <img src={thePlayer.image} />
+            
             <h3>Stats</h3>
             {statDisplay}
             <h3>Abilities</h3>

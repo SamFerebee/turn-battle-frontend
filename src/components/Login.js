@@ -22,8 +22,19 @@ const Login = ({setCurrentUser, sendToHome}) =>{
         })
             .then(r=>r.json())
             .then(d=>{
-                setCurrentUser(d);
-                sendToHome();
+                localStorage.setItem("token", d.token)
+                fetch("http://localhost:3000/me",{
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({user: d.user.username})
+                })
+                    .then(r=>r.json())
+                    .then(d=>{
+                        setCurrentUser(d);
+                        sendToHome();
+                    })
             })
     }
 

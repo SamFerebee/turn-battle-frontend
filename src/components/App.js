@@ -16,6 +16,28 @@ function App() {
   const [currentPlayer, setCurrentPlayer] = useState();
   const [currentPlayerGearStore, setCurrentPlayerGearStore] = useState();
   const [currentUser, setCurrentUser] = useState();
+  const autoLog = () => {
+    const token = localStorage.getItem("token");
+    if (token){
+      fetch("http://localhost:3000/autolog", {
+        headers:{
+          Authorization: `Bearer ${token}`
+        },
+      })
+        .then(r => r.json())
+        .then(user => {
+          setCurrentUser(user);
+          console.log(user);
+          console.log("autologged")
+          sendToHome();
+        })
+    }
+  }
+
+  useEffect(()=> {
+    //autoLog();
+  }, [])
+
 
   //SEND TO ROUTES
   const sendToCharCreate = () => history.push("/char_create");
@@ -26,6 +48,7 @@ function App() {
   const sendToHome = () => history.push("/home");
   const sendToGearStore = () => history.push("/gear_store");
   const sendToGearSelect = () => history.push("/gear_select");
+  const sendToLanding = () => history.push("/");
 
   return (
     <div className="App">
@@ -34,13 +57,13 @@ function App() {
           <LandingPage sendToSelect={sendToCharCreate} sendToLogin={sendToLogin} sendToCreateAcct={sendToCreateAcct}/>
         </Route>
         <Route exact path = "/create_account">
-          <CreateAccount />
+          <CreateAccount setCurrentUser={setCurrentUser} sendToHome={sendToHome}/>
         </Route>
         <Route exact path = "/login">
           <Login setCurrentUser={setCurrentUser} sendToHome={sendToHome} />
         </Route>
         <Route exact path = "/home">
-          <Homepage sendToBattle={sendToBattle} currentUser={currentUser} sendToCharCreate={sendToCharCreate} />
+          <Homepage autoLog={autoLog} sendToBattle={sendToBattle} currentUser={currentUser} sendToCharCreate={sendToCharCreate} sendToLanding={sendToLanding}/>
         </Route>
         <Route exact path = "/char_create">
           <CharCreation sendToBattle={sendToBattle} sendToAttrAdd={sendToAttrAdd} setCurrentPlayer={setCurrentPlayer} currentUser={currentUser} />
@@ -55,7 +78,7 @@ function App() {
           <GearStore setCurrentUser={setCurrentUser} currentUser={currentUser} currentPlayer={currentPlayerGearStore} />
         </Route>
         <Route exactpath = "/gear_select">
-          <GearSelect setCurrentUser={setCurrentUser} currentUser={currentUser} currentPlayer={currentPlayerGearStore}/>
+          <GearSelect sendToHome={sendToHome} setCurrentUser={setCurrentUser} currentUser={currentUser} currentPlayer={currentPlayerGearStore}/>
         </Route>
         <Route exact path = "/battle">
           <BattlePage player={currentPlayer} />
@@ -66,3 +89,5 @@ function App() {
 }
 
 export default App;
+
+//auto log is not always running for some reason
